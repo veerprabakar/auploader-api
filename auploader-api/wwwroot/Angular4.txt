@@ -1,0 +1,8 @@
+ASP.NET Core
+Angular 4
+
+
+cmd note:
+npm i -g npm-check-updates
+
+setx ASPNETCORE_ENVIRONMENT "Development"

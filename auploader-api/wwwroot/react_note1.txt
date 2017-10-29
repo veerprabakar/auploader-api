@@ -1,0 +1,9 @@
+To Do List:
+
+1. React 
+2. 
+3. Mobx
+4. Auth0
+5. Bootstrap
+6. Saas
+7. ANT Design
