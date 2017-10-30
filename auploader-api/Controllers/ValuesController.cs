@@ -44,11 +44,12 @@ namespace auploader_api.Controllers
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{
-
         //}
 
+        //POC : Code for file upload: enable CORS to test 
         [Route("/api/UploadFile")]
         [HttpPost]
+        [RequestSizeLimit(100_000_000)]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
