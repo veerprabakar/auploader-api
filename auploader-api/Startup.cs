@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using auploader.api.Model;
+using auploader.api.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace auploader_api
+namespace auploader.api
 {
     public class Startup
     {
@@ -34,6 +36,9 @@ namespace auploader_api
             });
 
             services.AddMvc();
+            //services.Configure<Settings>(sett => Configuration.GetSection("Settings").Bind(sett));
+            services.Configure<S3Settings>(s3Sett => Configuration.GetSection("S3Settings").Bind(s3Sett));
+            services.AddScoped<FileUploadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +53,6 @@ namespace auploader_api
                                    
             //app.UseCors(builder => builder.AllowAnyOrigin());
             //app.UseCors(builder => builder.WithOrigins("http://localhost:4200/*"));
-
             app.UseMvc();
         }
     }
