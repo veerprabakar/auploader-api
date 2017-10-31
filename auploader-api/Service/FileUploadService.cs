@@ -66,18 +66,18 @@ namespace auploader.api.Service
                 request.InputStream = file.FileConent;
 
                 //MD-HASH
-              /*  byte[] md5Hash = file.FileConent.Md5Hash();
-                request.MD5Digest = md5Hash.ToBase64String();*/
+                byte[] md5Hash = file.FileConent.Md5Hash();
+                request.MD5Digest = md5Hash.ToBase64String();
 
                 PutObjectResponse response = await S3Clinet.PutObjectAsync(request);
 
-               /* string eTag = response.ETag.Trim('"').ToLowerInvariant();
-                string expectedETag = md5Hash.ToS3ETagString();*/
+                string eTag = response.ETag.Trim('"').ToLowerInvariant();
+                string expectedETag = md5Hash.ToS3ETagString();
 
-     /*           if (eTag != expectedETag)
+                if (eTag != expectedETag)
                 {
                     throw new Exception("The eTag received from S3 doesn't match the eTag computed before uploading. This usually indicates that the file has been corrupted in transit.");
-                }*/
+                }
 
                 model.ObjectKey = objectKey;
                 //model.ETag = eTag;

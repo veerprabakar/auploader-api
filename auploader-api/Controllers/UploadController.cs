@@ -43,7 +43,7 @@ namespace auploader.api.Controllers
             var fileName = Path.GetFileName(
                                 ContentDispositionHeaderValue
                                 .Parse(file.ContentDisposition)
-                                .FileName.Value);
+                                .FileName.Value.Trim('"'));
 
             string objectKey = S3KeyGen.GenerateObjectKey(fileName);
 
@@ -56,10 +56,10 @@ namespace auploader.api.Controllers
                     S3Settings.OriginalBucketUrl,
                     objectKey,
                     S3StorageClass.Standard, //Need to check with Ginu
-                    S3CannedACL.Private, info);
+                    S3CannedACL.PublicRead, info);
                 if (model.Exception != null)
                 {
-                    //logg the error:
+                    //log the error:
                     return StatusCode((int) HttpStatusCode.InternalServerError);
                 }
                 return Created(model.ObjectLocation, model);

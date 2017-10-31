@@ -14,6 +14,8 @@ namespace auploader.api.Service
         {
             return $"{GetRandomPrefix(8)}/{DateTime.UtcNow:s}/{UrlEncoder.Default.Encode(fileName)}"
                 .Replace(':', '-');
+            /*return $"{DateTime.UtcNow:s}/{UrlEncoder.Default.Encode(fileName)}"
+                .Replace(':', '-');*/
         }
 
         private static string GetRandomPrefix(int length)
